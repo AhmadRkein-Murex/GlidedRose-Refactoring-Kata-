@@ -13,55 +13,50 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals(AGED_BRIE)
-                && !items[i].name.equals(BACKSTAGE_PASSES)) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals(SULFURAS)) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+        for (Item item : items) {
+            if (item.name.equals(SULFURAS))
+                continue;
 
-                    if (items[i].name.equals(BACKSTAGE_PASSES)) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
+            int offset = getQualityOffset(item);
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
+            if (item.sellIn < 0)
+                offset *= 2;
 
-            if (!items[i].name.equals(SULFURAS)) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
+            setQualityAndClamp(item, offset);
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals(AGED_BRIE)) {
-                    if (!items[i].name.equals(BACKSTAGE_PASSES)) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals(SULFURAS)) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = 0;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-            }
+            item.sellIn -= 1;
         }
+    }
+
+    private static int getQualityOffset(Item item) {
+        int offset = -1;
+
+        switch (item.name) {
+            case AGED_BRIE:
+                offset = 1;
+                break;
+            case BACKSTAGE_PASSES:
+                if (item.sellIn <= 0) {
+                    offset = item.quality * -1;
+                    break;
+                }
+
+                offset = 1;
+                if (item.sellIn < 11)
+                    offset++;
+                if (item.sellIn < 6)
+                    offset++;
+                break;
+            case CONJURED:
+                offset *= 2;
+                break;
+        }
+        return offset;
+    }
+
+    private static void setQualityAndClamp(Item item, int offset) {
+        item.quality += offset;
+        item.quality = Math.max(0, item.quality);
+        item.quality = Math.min(50, item.quality);
     }
 }

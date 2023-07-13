@@ -16,7 +16,7 @@ public class TexttestFixture {
             new Item(BACKSTAGE_PASSES, 10, 49),
             new Item(BACKSTAGE_PASSES, 5, 49),
             // this conjured item does not work properly yet
-            new Item(AGED_BRIE, 3, 6) };
+            new Item(CONJURED, 3, 6) };
 
         GildedRose app = new GildedRose(items);
 
