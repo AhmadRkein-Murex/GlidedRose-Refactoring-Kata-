@@ -2,9 +2,8 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.Test;
 
-import static com.gildedrose.GildedRose.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static com.gildedrose.Items.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GildedRoseTest {
 
@@ -193,6 +192,6 @@ class GildedRoseTest {
         app.updateQuality();
         app.updateQuality();
 
-        assertNotEquals("", items[0].toString());
+        assertEquals("Sulfuras, Hand of Ragnaros, 12, 80", items[0].toString());
     }
 }
