@@ -1,8 +1,9 @@
 package com.gildedrose;
 
+import com.gildedrose.Models.Item;
 import org.junit.jupiter.api.Test;
 
-import static com.gildedrose.Items.*;
+import static com.gildedrose.Models.Items.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GildedRoseTest {

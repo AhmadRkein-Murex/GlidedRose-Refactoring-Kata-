@@ -1,6 +1,8 @@
 package com.gildedrose;
 
-import static com.gildedrose.Items.*;
+import com.gildedrose.Models.Item;
+
+import static com.gildedrose.Models.Items.*;
 
 public class TexttestFixture {
     public static void main(String[] args) {

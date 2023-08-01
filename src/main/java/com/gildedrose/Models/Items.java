@@ -1,4 +1,4 @@
-package com.gildedrose;
+package com.gildedrose.Models;
 
 public class Items {
     public static final String AGED_BRIE = "Aged Brie";
